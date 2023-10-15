@@ -89,6 +89,34 @@ void stack_peek(stack *ptr, int pos)
              << "Data: " << ptr->arr[arr_index] << endl;
     }
 }
+int stack_top(stack *ptr)
+{
+    if (ptr->top < 0)
+    {
+        cout << endl
+             << "Stack Is Empty " << endl;
+        return 0;
+    }
+    else
+    {
+        cout << endl
+             << "Top Most Value Of Stack Is: " << ptr->arr[ptr->top] << endl;
+        return ptr->arr[ptr->top];
+    }
+}
+int stack_bottom(stack *ptr)
+{
+    if (ptr->top > -1)
+    {
+        cout << endl
+             << "Bottom Most Value Of Stack Is: " << ptr->arr[0] << endl;
+        return ptr->arr[0];
+    }
+    else
+        {cout << endl
+              << "Stack Is Empty " << endl;
+         return 0;}
+}
 int main()
 {
     stack *s = new stack; // struct ka pointer banaya jisko yek new stack ki taraf point kiya
@@ -102,7 +130,7 @@ int main()
     s->arr = new int[s->size]; // pointer s jise point kar rha us stack ke array ko memory allot ki jo integer variable size-1 hai
 
     int option;
-    while (option != 4)
+    while (option != 6)
     {
         line();
         cout << endl
@@ -114,7 +142,11 @@ int main()
              << "Enter 3 To Peek In Array";
 
         cout << endl
-             << "Enter 4 To Exit From Program" << endl
+             << "Enter 4 To See Top Most Data";
+        cout << endl
+             << "Enter 5 To See Bottom Most Data";
+        cout << endl
+             << "Enter 6 To Exit From Program" << endl
              << endl
              << "Choose Option: ";
         cin >> option;
@@ -122,26 +154,22 @@ int main()
         if (option == 1)
         {
 
-            if (option == 1)
+            if (check_full(s) == 1)
             {
-                if (check_full(s) == 1)
-                {
-                    cout << endl
-                         << "stack overflow " << endl;
-                }
-                else
-                {
-                    int temp;
-                    cout << endl
-                         << "Enter data: ";
-                    cin >> temp;
-                    stack_push(s, temp);
-                    cout << endl
-                         << "data storerd successfully" << endl;
-                }
+                cout << endl
+                     << "stack overflow " << endl;
+            }
+            else
+            {
+                int temp;
+                cout << endl
+                     << "Enter data: ";
+                cin >> temp;
+                stack_push(s, temp);
+                cout << endl
+                     << "data storerd successfully" << endl;
             }
         }
-
         else if (option == 2)
         {
             if (check_empty(s) == 1)
@@ -163,6 +191,14 @@ int main()
             int peek_position;
             cin >> peek_position;
             stack_peek(s, peek_position);
+        }
+        else if (option == 4)
+        {
+            stack_top(s);
+        }
+        else if (option == 5)
+        {
+            stack_bottom(s);
         }
     }
 }
