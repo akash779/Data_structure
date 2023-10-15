@@ -58,6 +58,7 @@ int stack_pop(stack *ptr)
 }
 
 void line()
+
 {
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
     CONSOLE_SCREEN_BUFFER_INFO consoleInfo;
@@ -72,11 +73,27 @@ void line()
     cout << endl;
 }
 
+void stack_peek(stack *ptr, int pos)
+{
+    int arr_index = ptr->top - pos + 1;
+    if (arr_index < 0 || arr_index > ptr->top)
+    {
+
+        cout << endl
+             << "Invalid Position" << endl;
+    }
+    else
+    {
+        cout << endl
+             << "At Position: " << pos << endl
+             << "Data: " << ptr->arr[arr_index] << endl;
+    }
+}
 int main()
 {
     stack *s = new stack; // struct ka pointer banaya jisko yek new stack ki taraf point kiya
 
-    s->size = 2; // pointer s jise point kar rha hai us stack ke size naam ke variable ko value assign ki
+    s->size = 5; // pointer s jise point kar rha hai us stack ke size naam ke variable ko value assign ki
 
     s->top = -1; // poointer s jise point kar rha hai us stack ke top naam ke variable ko value assign ki
 
@@ -85,7 +102,7 @@ int main()
     s->arr = new int[s->size]; // pointer s jise point kar rha us stack ke array ko memory allot ki jo integer variable size-1 hai
 
     int option;
-    while (option != 3)
+    while (option != 4)
     {
         line();
         cout << endl
@@ -94,7 +111,10 @@ int main()
              << "Enter 2 To Pop Data In Stack  ";
 
         cout << endl
-             << "Enter 3 To Exit From Program" << endl
+             << "Enter 3 To Peek In Array";
+
+        cout << endl
+             << "Enter 4 To Exit From Program" << endl
              << endl
              << "Choose Option: ";
         cin >> option;
@@ -135,6 +155,14 @@ int main()
                      << "stack pop successfully" << endl
                      << "Data " << poped_data << " Poped" << endl;
             }
+        }
+        else if (option == 3)
+        {
+            cout << endl
+                 << "Enter Position On Which Want To Peek In Stack : ";
+            int peek_position;
+            cin >> peek_position;
+            stack_peek(s, peek_position);
         }
     }
 }
