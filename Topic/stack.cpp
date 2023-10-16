@@ -156,7 +156,7 @@ node *node_stack_push(node *top, int value)
     if (node_stack_full(top) == 1)
     {
         cout << endl
-             << "Stack Overflow"<<endl;
+             << "Stack Overflow" << endl;
         return 0;
     }
     else
@@ -191,11 +191,29 @@ void link_list_travel(node *ptr)
 {
     while (ptr != NULL)
     {
-        cout << ptr->data <<"  ";
+        cout << ptr->data << "  ";
         ptr = ptr->next;
-    }cout<<endl<<endl<<endl<<"Link List Printed Successfully"<<endl;
+    }
+    cout << endl
+         << endl
+         << endl
+         << "Link List Printed Successfully" << endl;
 }
-
+int node_stack_peek(node *ptr, int pos)
+{
+    for (int i = 0; i < pos - 1 && ptr != NULL; i++)
+    {
+        ptr = ptr->next;
+    }
+    if (ptr != NULL)
+    {
+        return ptr->data;
+    }
+    else
+    {
+        return -1;
+    }
+}
 int main()
 {
     int i = 0;
@@ -205,8 +223,8 @@ int main()
         cout << endl
              << "Press 1 For Implement Stack Using Array" << endl
              << "Press 2 For Implement Stack Using Link List" << endl
-             << "Press 3 For Exit"<<endl;
-             cout<<"Input Opiton: ";
+             << "Press 3 For Exit" << endl;
+        cout << "Input Opiton: ";
         cin >> i;
         system("cls");
         if (i == 1)
@@ -298,7 +316,7 @@ int main()
         {
             node *top = NULL;
             int option;
-            while (option != 6)
+            while (option != 7)
 
             {
                 line();
@@ -317,8 +335,10 @@ int main()
                 cout << endl
                      << "Press 5 TO Print Link List" << endl;
                 cout << endl
-                     << "Press 6 To Go Back In Main Menu"<<endl;
-                     cout<<"Input Option: ";
+                     << "Press 6 To Peek In Stack ";
+                cout << endl
+                     << "Press 7 To Go Back In Main Menu" << endl;
+                cout << "Input Option: ";
                 cin >> option;
                 system("cls");
 
@@ -330,49 +350,61 @@ int main()
                     cin >> data;
                     top = node_stack_push(top, data);
                     cout << endl
-                         << "Data Store Successfully"<<endl;
+                         << "Data Store Successfully" << endl;
                 }
                 else if (option == 2)
                 {
                     if (node_stack_empty(top) == 1)
                     {
-                        cout << "Stack Underflow"<<endl;
+                        cout << "Stack Underflow" << endl;
                     }
                     else
                     {
                         int data = node_stack_pop(&top);
                         cout << endl
-                             << data << " Data Poped Successfully "<<endl;
+                             << data << " Data Poped Successfully " << endl;
                     }
                 }
                 else if (option == 3)
                 {
                     if (node_stack_empty(top) == 1)
                     {
-                        cout << "Stack Under Flow"<<endl;
+                        cout << "Stack Under Flow" << endl;
                     }
                     else
                     {
                         cout << endl
-                             << "Stack Not Empty "<<endl;
+                             << "Stack Not Empty " << endl;
                     }
                 }
                 else if (option == 4)
                 {
                     if (node_stack_full(top) == 1)
                     {
-                        cout << "Stck Overflow"<<endl;
+                        cout << "Stck Overflow" << endl;
                     }
                     else
                     {
                         cout << endl
-                             << "Stack Not Full"<<endl;
+                             << "Stack Not Full" << endl;
                     }
                 }
                 else if (option == 5)
                 {
                     cout << "Link List: ";
                     link_list_travel(top);
+                }
+
+                else if (option == 6)
+                {
+                    cout << endl
+                         << "Enter Position In Stack Want To peek: ";
+                    int pos;
+                    cin >> pos;
+                    cout << endl;
+                    int Data = node_stack_peek(top, pos);
+                    cout << endl
+                         << Data << " Is Present In Stack At Position " << pos << endl;
                 }
             }
         }
